@@ -1,0 +1,3 @@
+class MostAnticipatedBooks::Scraper
+
+end
