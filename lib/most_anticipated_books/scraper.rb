@@ -27,6 +27,15 @@ class MostAnticipatedBooks::Scraper
 				title_array << {:title => matches_3.text, :amazon_url => matches_3[0]["href"], :description => paragraph.text}
 			end
 		end
+
+		start = "translated by[[:space:]]"
+		finish = Regexp.escape(')')
+
+		title_array.each do |book|
+			if book[:description].include?("translated by")
+				book[:translator] = book[:description][/#{start}(.*?)#{finish}/m, 1]
+			end
+		end
 		
 		puts title_array
 	end
