@@ -46,4 +46,20 @@ class MostAnticipatedBooks::Scraper
 		end
 	end
 
+	def self.scrape_amazon(book)
+		doc = Nokogiri::HTML(open(book.amazon_url))
+
+		author = doc.xpath("//span[contains(@class, 'author notFaded')]/a[contains(@class, 'a-link-normal')]")
+		#{}/*[descendant::span[@class="contribution"]]"
+		#site_title = doc.css("title").text.split(": ")
+		#author = site_title[site_title.index("Books") - 1]
+
+		#notFaded = doc.css(".author.notFaded a.a-link-normal")
+		#notFaded_text = notFaded.collect {|node| node.text}
+		#author = site_title & notFaded_text
+
+		puts author
+
+	end
+
 end
