@@ -18,13 +18,13 @@ class MostAnticipatedBooks::Scraper
 			matches_2 = paragraph.css("a[href]") & amazon_link_2
 			matches_3 = paragraph.css("a[href]") & amazon_link_3
 			if matches.length > 0
-				title_array << {:title => matches.text, :amazon_url => matches[0]["href"]}
+				title_array << {:title => matches.text, :amazon_url => matches[0]["href"], :description => paragraph.text}
 			end
 			if matches_2.length > 0
-				title_array << {:title => matches_2.text, :amazon_url => matches_2[0]["href"]}
+				title_array << {:title => matches_2.text, :amazon_url => matches_2[0]["href"], :description => paragraph.text}
 			end
 			if matches_3.length > 0
-				title_array << {:title => matches_3.text, :amazon_url => matches_3[0]["href"]}
+				title_array << {:title => matches_3.text, :amazon_url => matches_3[0]["href"], :description => paragraph.text}
 			end
 		end
 		
