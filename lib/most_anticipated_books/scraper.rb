@@ -55,8 +55,8 @@ class MostAnticipatedBooks::Scraper
 		book.publication_date = doc.css("div#booksTitle > div.a-section.a-spacing-none > h1#title > span:nth-child(3)").text.delete("–").strip
 		book.genre = doc.css("ul.zg_hrsr > li.zg_hrsr_item > span.zg_hrsr_ladder > a:nth-child(2)")[0].text
 		
-		puts book.publication_date
-		puts book.genre
+		book.isbn = doc.at_css('li:contains("ISBN-10")').text.sub("ISBN-10: ", '')
+		puts book.isbn
 	end
 
 end

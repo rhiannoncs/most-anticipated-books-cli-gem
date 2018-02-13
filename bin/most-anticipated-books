@@ -5,7 +5,7 @@ require_relative '../lib/most_anticipated_books'
 #MostAnticipatedBooks::CLI.new.call
 
 book = MostAnticipatedBooks::Book.new("The Perfect Nanny")
-book.amazon_url = "http://www.amazon.com/exec/obidos/ASIN/006242873X/ref=nosim/themill0b-20"
+book.amazon_url = "http://www.amazon.com/exec/obidos/ASIN/1524761559/ref=nosim/themill0b-20"
 
 MostAnticipatedBooks::Scraper.scrape_amazon(book)
 
