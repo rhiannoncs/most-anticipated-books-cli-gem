@@ -56,7 +56,11 @@ class MostAnticipatedBooks::Scraper
 		book.genre = doc.css("ul.zg_hrsr > li.zg_hrsr_item > span.zg_hrsr_ladder > a:nth-child(2)")[0].text
 		
 		book.isbn = doc.at_css('li:contains("ISBN-10")').text.sub("ISBN-10: ", '')
-		puts book.isbn
+
+		start = "Publisher:[[:space:]]"
+		finish = Regexp.escape('(')
+		book.publisher = doc.at_css('li:contains("Publisher")').text[/#{start}(.*?)[[:space:]]#{finish}/m, 1]
+		puts book.publisher
 	end
 
 end
