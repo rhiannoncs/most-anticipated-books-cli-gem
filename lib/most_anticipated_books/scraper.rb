@@ -44,8 +44,8 @@ class MostAnticipatedBooks::Scraper
 		end
 		
 		MostAnticipatedBooks::Book.all.each do |book|
-			puts book.title + "/" + book.author if book.author
-			#puts book.translator if book.translator
+			puts book.title
+			puts book.amazon_url
 		end
 	end
 
@@ -60,7 +60,21 @@ class MostAnticipatedBooks::Scraper
 		start = "Publisher:[[:space:]]"
 		finish = Regexp.escape('(')
 		book.publisher = doc.at_css('li:contains("Publisher")').text[/#{start}(.*?)[[:space:]]#{finish}/m, 1]
-		puts book.publisher
+		
+		book.subgenres = []
+		subgenres = doc.css("ul.zg_hrsr > li.zg_hrsr_item > span.zg_hrsr_ladder > a")
+		subgenres.each do |genre|
+			book.subgenres << genre.text unless genre.text == "Books" || book.subgenres.include?(genre.text) || book.genre == genre.text
+		end
+		final_subgenres = doc.css("ul.zg_hrsr > li.zg_hrsr_item > span.zg_hrsr_ladder > b > a")
+		final_subgenres.each do |genre|
+			book.subgenres << genre.text unless genre.text == "Books" || book.subgenres.include?(genre.text) || book.genre == genre.text
+		end
+		
+		puts "Publication Date: #{book.publication_date}"
+		puts "Publisher: #{book.publisher}, ISBN: #{book.isbn}"
+		puts "Genre: #{book.genre}"
+		puts "Subgenres: #{book.subgenres}"
 	end
 
 end
