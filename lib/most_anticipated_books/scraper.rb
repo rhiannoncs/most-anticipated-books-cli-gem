@@ -53,8 +53,10 @@ class MostAnticipatedBooks::Scraper
 		doc = Nokogiri::HTML(open(book.amazon_url))
 
 		book.publication_date = doc.css("div#booksTitle > div.a-section.a-spacing-none > h1#title > span:nth-child(3)").text.delete("–").strip
-
+		book.genre = doc.css("ul.zg_hrsr > li.zg_hrsr_item > span.zg_hrsr_ladder > a:nth-child(2)")[0].text
+		
 		puts book.publication_date
+		puts book.genre
 	end
 
 end
