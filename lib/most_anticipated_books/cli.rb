@@ -10,15 +10,17 @@ class MostAnticipatedBooks::CLI
 
 		case input
 		when "1"
-			puts "list all books"
+			MostAnticipatedBooks::Book.list_all
 		when "2"
-			puts "month"
+			puts "Which month would you like to explore?"
+			month_input = gets.strip
+			MostAnticipatedBooks::Book.books_by_month(month_input)
 		when "3"
-			puts "list genres"
+			MostAnticipatedBooks::Genre.list_all
 		when "4"
-			puts "list authors"
+			MostAnticipatedBooks::Author.list_all
 		when "5"
-			puts "list books in translation"
+			MostAnticipatedBooks::Book.translated_books
 		when "exit"
 			exit
 		end

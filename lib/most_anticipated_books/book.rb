@@ -11,6 +11,10 @@ class MostAnticipatedBooks::Book
 		@@all
 	end
 
+	def self.list_all
+		@@all.each {|book| puts "#{book.title} by #{book.author}"}
+	end
+
 	def self.books_by_month(month)
   		@@all.each {|book| book.display_info if book.publication_date.include?(month)}
   	end
