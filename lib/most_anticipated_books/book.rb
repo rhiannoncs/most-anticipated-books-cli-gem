@@ -64,4 +64,8 @@ class MostAnticipatedBooks::Book
   	def self.books_by_genre(genre_name)
     	all.each {|book| puts book.title if book.genre.name == genre_name}
   	end
+
+  	def self.translated_books
+  		all.each {|book| puts book.title if book.translator}
+  	end
 end
