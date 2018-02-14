@@ -2,6 +2,10 @@ class MostAnticipatedBooks::CLI
 	def call
 		puts "Welcome! Let's explore the Most Anticipated Books for the first half of 2018."
 		
+		explore_menu
+	end
+
+	def explore_menu
 		input = menu
 
 		case input
@@ -36,6 +40,7 @@ class MostAnticipatedBooks::CLI
 
 			input = gets.downcase.strip
 		end
+		input
 	end
 
 	def list_all
@@ -56,7 +61,7 @@ class MostAnticipatedBooks::CLI
 
 		case secondary_input
 		when "menu"
-			menu
+			explore_menu
 		when "exit"
 			exit
 		end	
