@@ -18,21 +18,44 @@ perfect_nanny.author = "Leila Slimani"
 perfect_nanny.amazon_url = "http://www.amazon.com/exec/obidos/ASIN/0143132172/ref=nosim/themill0b-20"
 perfect_nanny.description = "In her Goncourt Prize-winning novel, Slimani gets the bad news out of the way early—on the first page to be exact: “The baby is dead. It only took a few seconds. The doctor said he didn’t suffer. The broken body, surrounded by toys, was put inside a gray bag, which they zipped up.” Translated from the French by Sam Taylor as The Perfect Nanny—the original title was Chanson Douce, or Lullaby—this taut story about an upper-class couple and the woman they hire to watch their child tells of good help gone bad.  (Matt)"
 perfect_nanny.translator = "Sam Taylor"
+perfect_nanny.publication_date = "January 9, 2018"
+perfect_nanny.genre = "Literature & Fiction"
+perfect_nanny.isbn = "0143132172"
+perfect_nanny.publisher = "Penguin Books"
+perfect_nanny.subgenres = ["Women's Fiction", "Domestic Life", "Mystery, Thriller & Suspense", "Thrillers & Suspense", "Crime", "Murder", "Literary"]
 
 this_will_be = MostAnticipatedBooks::Book.new("This Will Be My Undoing")
 this_will_be.author = "Morgan Jerkins"
 this_will_be.amazon_url = "http://www.amazon.com/exec/obidos/ASIN/0062666150/ref=nosim/themill0b-20"
 this_will_be.description = "Wünderkind Jerkins has a background in 19th-century Russian lit and postwar Japanese lit, speaks six languages, works/has worked as editor and assistant literary agent; she writes across many genres—reportage, personal essays, fiction, profiles, interviews, literary criticism, and sports and pop culture pieces; and now we’ll be seeing her first book, an essay collection.  From the publisher: “This is a book about black women, but it’s necessary reading for all Americans.” The collected essays will cover topics ranging from “Rachel Dolezal; the stigma of therapy; her complex relationship with her own physical body; the pain of dating when men say they don’t ‘see color’; being a black visitor in Russia; the specter of ‘the fast-tailed girl’ and the paradox of black female sexuality; or disabled black women in the context of the ‘Black Girl Magic’ movement.”  (Sonya)"
+this_will_be.publication_date = "January 30, 2018"
+this_will_be.genre = "Politics & Social Sciences"
+this_will_be.isbn = "0062666150"
+this_will_be.publisher = "Harper Perennial"
+this_will_be.subgenres = ["Women's Studies", "Feminist Theory", "Biographies & Memoirs", "Ethnic & National", "African-American & Black", "Sociology", "Race Relations", "Discrimination & Racism"]
+
 
 mars_room = MostAnticipatedBooks::Book.new("The Mars Room")
 mars_room.author = "Rachel Kushner"
 mars_room.amazon_url = "http://www.amazon.com/exec/obidos/ASIN/1476756554/ref=nosim/themill0b-20"
 mars_room.description = "In her third novel, two-time National Book Award-finalist Kushner writes about a woman named Romy Hall who is serving two consecutive life sentences (plus six years) in a prison in California’s Central Valley. The year is 2003, and the Mars Room in the title refers to a strip club in San Francisco where Romy used to dance; according to the jacket copy, Kushner details “the deadpan absurdities of institutional living…with humor and precision.” George Saunders calls Kushner “a young master” and Robert Stone wrote that she is “a novelist of the very first order.” Check out this short excerpt published by Entertainment Weekly. (Edan)"
+mars_room.publication_date = "May 1, 2018"
+mars_room.genre = "Mystery, Thriller & Suspense"
+mars_room.isbn = "1476756554"
+mars_room.publisher = "Scribner"
+mars_room.subgenres = ["Thrillers & Suspense", "Crime", "Serial Killers", "Murder", "Literature & Fiction", "Literary"]
+
 
 good_trouble = MostAnticipatedBooks::Book.new("Good Trouble")
 good_trouble.author = "Joseph O'Neill"
 good_trouble.amazon_url = "http://www.amazon.com/exec/obidos/ASIN/1524747351/ref=nosim/themill0b-20"
 good_trouble.description = "Frequent New Yorker and Harper’s readers will know that O’Neill has been writing a lot of short fiction lately. With the new Good Trouble, the Netherland author now has a full collection, comprised of 11 off-kilter, unsettling stories. Their characters range from a would-be renter in New York who can’t get anyone to give him a reference to a poet who can’t decide whether or not to sign a petition. (Thom)"
-MostAnticipatedBooks::Book.all.each {|book| MostAnticipatedBooks::Scraper.scrape_amazon(book)}
+good_trouble.publication_date = "June 12, 2018"
+good_trouble.genre = "Literature & Fiction"
+good_trouble.isbn = "1524747351"
+good_trouble.publisher = "Pantheon"
+good_trouble.subgenres = ["Genre Fiction", "Urban Life", "Short Stories & Anthologies", "Short Stories", "Literary"]
 
-MostAnticipatedBooks::Book.translated_books
+#MostAnticipatedBooks::Book.all.each {|book| MostAnticipatedBooks::Scraper.scrape_amazon(book)}
+
+MostAnticipatedBooks::CLI.new.call
