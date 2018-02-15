@@ -12,9 +12,7 @@ class MostAnticipatedBooks::CLI
 		when "1"
 			list_all
 		when "2"
-			puts "Which month would you like to explore?"
-			month_input = gets.strip
-			MostAnticipatedBooks::Book.books_by_month(month_input)
+			list_by_month
 		when "3"
 			MostAnticipatedBooks::Genre.list_all
 		when "4"
@@ -46,13 +44,21 @@ class MostAnticipatedBooks::CLI
 	def list_all
 		MostAnticipatedBooks::Book.list_all
 			
+		detail_view(MostAnticipatedBooks::Book.all)
+			
+		follow_up
+	end
+
+	def detail_view(book_array)
 		number_selection = nil
-		until (1..MostAnticipatedBooks::Book.all.length + 1).include?(number_selection) do
+		until (1..book_array.length + 1).include?(number_selection) do
 			puts "To see more information about a title, enter its number."
 			number_selection = gets.to_i
 		end
-		MostAnticipatedBooks::Book.book_by_number(number_selection)
-			
+		MostAnticipatedBooks::Book.book_by_number(book_array, number_selection)
+	end
+
+	def follow_up
 		secondary_input = nil
 		until ["menu", "exit"].include?(secondary_input) do
 			puts "If you would like to see the menu for more options, type 'menu.' To exit, type 'exit.'"
@@ -64,6 +70,19 @@ class MostAnticipatedBooks::CLI
 			explore_menu
 		when "exit"
 			exit
-		end	
+		end
+	end	
+
+	def list_by_month
+		month_input = nil
+		until ["January", "February", "March", "April", "May", "June"].include?(month_input) do
+			puts "Which month would you like to explore (January-June)?"
+			month_input = gets.capitalize.strip
+		end
+		month_books = MostAnticipatedBooks::Book.books_by_month(month_input)
+
+		detail_view(month_books)
+
+		follow_up
 	end	
 end

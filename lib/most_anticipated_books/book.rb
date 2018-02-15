@@ -16,11 +16,13 @@ class MostAnticipatedBooks::Book
 	end
 
 	def self.books_by_month(month)
-  		all.each {|book| book.display_info if book.publication_date.include?(month)}
+		month_books = all.select{|book| book.publication_date.include?(month)}
+  		month_books.each_with_index {|book, index| puts "#{index + 1}. #{book.title} by #{book.author.name}"}
+  		month_books
   	end
 
-  	def self.book_by_number(number_input)
-  		all.each_with_index {|book, index| book.display_info if index == number_input - 1}
+  	def self.book_by_number(book_array, number_input)
+  		book_array.each_with_index {|book, index| book.display_info if index == number_input - 1}
   	end
 
   	def display_info
@@ -33,6 +35,7 @@ class MostAnticipatedBooks::Book
     	puts "Publisher: #{self.publisher}, ISBN: #{self.isbn}"
     	puts "----------"
     	puts self.description
+    	puts "*******"
     end
 
     def genre=(genre_name)
