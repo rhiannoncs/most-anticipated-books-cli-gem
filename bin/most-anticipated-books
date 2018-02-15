@@ -10,8 +10,9 @@ require_relative '../lib/most_anticipated_books'
 #MostAnticipatedBooks::Scraper.scrape_amazon(book)
 
 MostAnticipatedBooks::Scraper.scrape_millions("https://themillions.com/2018/01/most-anticipated-the-great-2018-book-preview.html")
-#array = MostAnticipatedBooks::Book.all[0..5]
-#array.each {|book| MostAnticipatedBooks::Scraper.scrape_amazon(book)}
+array = MostAnticipatedBooks::Book.all[0..5]
+array.each {|book| MostAnticipatedBooks::Scraper.scrape_amazon(book)}
+array.each {|book| book.display_info}
 
 #perfect_nanny = MostAnticipatedBooks::Book.new("The Perfect Nanny")
 #perfect_nanny.author = "Leila Slimani"

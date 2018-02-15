@@ -30,8 +30,7 @@ class MostAnticipatedBooks::Book
     	puts "#{self.title} by #{self.author.name}"
     	puts "Translated by #{self.translator.name}" if self.translator
     	puts "Publication Date: #{self.publication_date}"
-    	puts "Genre: #{self.genre.name}"
-    	puts "Subgenres: #{self.subgenres.join(", ")}"
+    	puts "Genres: #{self.genre.name}, #{self.subgenres.join(", ")}"
     	puts "Publisher: #{self.publisher}, ISBN: #{self.isbn}"
     	puts "----------"
     	puts self.description

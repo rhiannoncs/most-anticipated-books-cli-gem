@@ -27,7 +27,6 @@ class MostAnticipatedBooks::Scraper
 				description_author_translator(paragraph, book)
 			end
 		end
-		MostAnticipatedBooks::Book.all.each {|book| puts book.title, book.author, book.description}
 	end
 
 	def self.description_author_translator(paragraph, book)
@@ -65,7 +64,7 @@ class MostAnticipatedBooks::Scraper
 		
 		if subgenres.text.length > 0
 			subgenres.each do |genre|
-				book.subgenres << genre.text unless genre.text == "Books" || book.subgenres.include?(genre.text) || book.genre == genre.text
+				book.subgenres << genre.text unless genre.text == "Books" || book.subgenres.include?(genre.text) || book.genre.name == genre.text
 			end
 		else 
 			book.subgenres << "Unknown"
@@ -74,7 +73,7 @@ class MostAnticipatedBooks::Scraper
 		
 		if final_subgenres.text.length > 0
 			final_subgenres.each do |genre|
-				book.subgenres << genre.text unless genre.text == "Books" || book.subgenres.include?(genre.text) || book.genre == genre.text
+				book.subgenres << genre.text unless genre.text == "Books" || book.subgenres.include?(genre.text) || book.genre.name == genre.text
 			end
 		else
 			book.subgenres << "Unknown" unless book.subgenres.include?("Unknown")
