@@ -12,8 +12,13 @@ class MostAnticipatedBooks::Genre
     @@all
   end
 
+  def self.lowercase_all
+    lowercased = all.collect {|genre| genre.name.downcase}
+    lowercased
+  end
+
   def self.list_all
-    @@all.each {|genre| puts genre.name}
+    all.each {|genre| puts genre.name}
   end
   
   def add_book(book)
@@ -29,7 +34,7 @@ class MostAnticipatedBooks::Genre
   end
   
   def self.genres_with_count
-    @@all.each {|genre| puts "#{genre.name}: #{genre.book_count}"}
+    all.each {|genre| puts "#{genre.name}: #{genre.book_count} Books"}
   end
   
 end

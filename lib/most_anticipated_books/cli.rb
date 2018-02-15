@@ -14,7 +14,7 @@ class MostAnticipatedBooks::CLI
 		when "2"
 			list_by_month
 		when "3"
-			MostAnticipatedBooks::Genre.list_all
+			list_by_genre
 		when "4"
 			MostAnticipatedBooks::Author.list_all
 		when "5"
@@ -82,6 +82,22 @@ class MostAnticipatedBooks::CLI
 		month_books = MostAnticipatedBooks::Book.books_by_month(month_input)
 
 		detail_view(month_books)
+
+		follow_up
+	end
+
+	def list_by_genre
+		MostAnticipatedBooks::Genre.genres_with_count
+
+		genre_input = nil
+		until MostAnticipatedBooks::Genre.lowercase_all.include?(genre_input) do
+			puts "To see a list of books within a genre, enter the genre."
+			genre_input = gets.downcase.strip
+		end
+
+		genre_books = MostAnticipatedBooks::Book.books_by_genre(genre_input)
+
+		detail_view(genre_books)
 
 		follow_up
 	end	

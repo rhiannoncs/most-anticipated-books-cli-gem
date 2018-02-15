@@ -73,7 +73,9 @@ class MostAnticipatedBooks::Book
   	end
   
   	def self.books_by_genre(genre_name)
-    	all.each {|book| puts book.title if book.genre.name == genre_name}
+  		genre_books = all.select{|book| book.genre.name.downcase == genre_name}
+  		genre_books.each_with_index {|book, index| puts "#{index + 1}. #{book.title} by #{book.author.name}"}
+  		genre_books
   	end
 
   	def self.translated_books
