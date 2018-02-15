@@ -34,7 +34,7 @@ class MostAnticipatedBooks::Genre
   end
   
   def self.genres_with_count
-    all.each {|genre| puts "#{genre.name}: #{genre.book_count} Books"}
+    all.each_with_index {|genre, index| puts "#{index + 1}. #{genre.name}: #{genre.book_count} Titles"}
   end
   
 end

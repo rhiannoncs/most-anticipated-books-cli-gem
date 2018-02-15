@@ -94,13 +94,17 @@ class MostAnticipatedBooks::CLI
 	def list_by_genre
 		MostAnticipatedBooks::Genre.genres_with_count
 
-		genre_input = nil
-		until MostAnticipatedBooks::Genre.lowercase_all.include?(genre_input) do
-			puts "To see a list of books within a genre, enter the genre."
-			genre_input = gets.downcase.strip
+		number_input = nil
+		until (1..MostAnticipatedBooks::Genre.all.length).include?(number_input) do
+			puts "To see a list of books within a genre, enter its number."
+			number_input = gets.to_i
 		end
+		#until MostAnticipatedBooks::Genre.lowercase_all.include?(genre_input) do
+		#	puts "To see a list of books within a genre, enter the genre."
+		#	genre_input = gets.downcase.strip
+		#end
 
-		genre_books = MostAnticipatedBooks::Book.books_by_genre(genre_input)
+		genre_books = MostAnticipatedBooks::Book.books_by_genre(number_input)
 
 		detail_view(genre_books)
 
