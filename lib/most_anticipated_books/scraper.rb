@@ -18,42 +18,35 @@ class MostAnticipatedBooks::Scraper
 				book = MostAnticipatedBooks::Book.new(matches.text.gsub(/\A[[:space:]]+|[[:space:]]+\z/, ''))
 				book.amazon_url = matches[0]["href"]
 				book.description = paragraph.text
-				book.author = paragraph.css("strong")[0].text.delete(":")
+				book.author = paragraph.css("strong")[0].text.delete(":").strip
 				if book.description.include?("translated by")
 					book.translator = book.description[/#{start}(.*?)#{finish}/m, 1]
 				end
-				puts "#{book.title} made"
 			end
 			if matches_2.length > 0
 				book = MostAnticipatedBooks::Book.new(matches_2.text.gsub(/\A[[:space:]]+|[[:space:]]+\z/, ''))
 				book.amazon_url = matches_2[0]["href"]
 				book.description = paragraph.text
-				book.author = paragraph.css("strong")[0].text.delete(":")
+				book.author = paragraph.css("strong")[0].text.delete(":").strip
 				if book.description.include?("translated by")
 					book.translator = book.description[/#{start}(.*?)#{finish}/m, 1]
 				end
-				puts "#{book.title} made"
 			end
 			if matches_3.length > 0
 				book = MostAnticipatedBooks::Book.new(matches_3.text.gsub(/\A[[:space:]]+|[[:space:]]+\z/, ''))
 				book.amazon_url = matches_3[0]["href"]
 				book.description = paragraph.text
-				book.author = paragraph.css("strong")[0].text.delete(":")
+				book.author = paragraph.css("strong")[0].text.delete(":").strip
 				if book.description.include?("translated by")
 					book.translator = book.description[/#{start}(.*?)#{finish}/m, 1]
 				end
-				puts "#{book.title} made"
 			end
 		end
-		
-		#MostAnticipatedBooks::Book.all.each do |book|
-		#	puts book.title
-		#	puts book.amazon_url
-		#end
 	end
 
 	def self.scrape_amazon(book)
-		doc = Nokogiri::HTML(open(book.amazon_url))
+		user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+		doc = Nokogiri::HTML(open(book.amazon_url, 'User-Agent' => user_agent))
 
 		publication_date = doc.css("div#booksTitle > div.a-section.a-spacing-none > h1#title > span:nth-child(3)").text
 		publication_date.length == 0 ? book.publication_date = "Unknown" : book.publication_date = publication_date.delete("–").strip
@@ -89,15 +82,8 @@ class MostAnticipatedBooks::Scraper
 		else
 			book.subgenres << "Unknown" unless book.subgenres.include?("Unknown")
 		end
-		puts "#{book.title} updated"
-		#puts "Author: #{book.author}"
-		#puts "Date: #{book.publication_date}"
-		#puts "Genre: #{book.genre}"
-		#puts "ISBN: #{book.isbn}"
-		#puts "Publisher: #{book.publisher}"
-		#puts "Subgenres: #{book.subgenres}"
 
-		
+		puts "#{book.title} updated"
 	end
 
 end

@@ -28,7 +28,7 @@ class MostAnticipatedBooks::Book
   	def display_info
     	puts "*******"
     	puts "#{self.title} by #{self.author.name}"
-    	puts "Translated by #{self.translator}" if self.translator
+    	puts "Translated by #{self.translator.name}" if self.translator
     	puts "Publication Date: #{self.publication_date}"
     	puts "Genre: #{self.genre.name}"
     	puts "Subgenres: #{self.subgenres.join(", ")}"
@@ -83,6 +83,8 @@ class MostAnticipatedBooks::Book
   	end	
 
   	def self.translated_books
-  		all.each {|book| puts book.title if book.translator}
+  		translated_books = all.select{|book| book.translator}
+  		translated_books.each_with_index {|book, index| puts "#{index + 1}. #{book.title} by #{book.author.name}"}
+  		translated_books
   	end
 end

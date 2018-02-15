@@ -1,6 +1,11 @@
 class MostAnticipatedBooks::CLI
+
 	def call
 		puts "Welcome! Let's explore the Most Anticipated Books for the first half of 2018."
+		puts "Loading book data. Please be patient - this might take a little while."
+
+		MostAnticipatedBooks::Scraper.scrape_millions("https://themillions.com/2018/01/most-anticipated-the-great-2018-book-preview.html")
+		MostAnticipatedBooks::Book.all.each {|book| MostAnticipatedBooks::Scraper.scrape_amazon(book)}
 		
 		explore_menu
 	end
@@ -18,7 +23,7 @@ class MostAnticipatedBooks::CLI
 		when "4"
 			list_by_author
 		when "5"
-			MostAnticipatedBooks::Book.translated_books
+			list_in_translation
 		when "exit"
 			exit
 		end
@@ -51,7 +56,7 @@ class MostAnticipatedBooks::CLI
 
 	def detail_view(book_array)
 		number_selection = nil
-		until (1..book_array.length + 1).include?(number_selection) do
+		until (1..book_array.length).include?(number_selection) do
 			puts "To see more information about a title, enter its number."
 			number_selection = gets.to_i
 		end
@@ -112,6 +117,14 @@ class MostAnticipatedBooks::CLI
 		end
 
 		MostAnticipatedBooks::Book.books_by_author(author_input)
+
+		follow_up
+	end
+
+	def list_in_translation
+		translated_books = MostAnticipatedBooks::Book.translated_books
+
+		detail_view(translated_books)
 
 		follow_up
 	end	
