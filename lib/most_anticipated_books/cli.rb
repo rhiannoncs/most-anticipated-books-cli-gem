@@ -16,7 +16,7 @@ class MostAnticipatedBooks::CLI
 		when "3"
 			list_by_genre
 		when "4"
-			MostAnticipatedBooks::Author.list_all
+			list_by_author
 		when "5"
 			MostAnticipatedBooks::Book.translated_books
 		when "exit"
@@ -98,6 +98,20 @@ class MostAnticipatedBooks::CLI
 		genre_books = MostAnticipatedBooks::Book.books_by_genre(genre_input)
 
 		detail_view(genre_books)
+
+		follow_up
+	end
+
+	def list_by_author
+		MostAnticipatedBooks::Author.list_all	
+
+		author_input = nil
+		until MostAnticipatedBooks::Author.lowercase_all.include?(author_input) do
+			puts "To see information about an author's book(s), enter the author's name."
+			author_input = gets.downcase.strip
+		end
+
+		MostAnticipatedBooks::Book.books_by_author(author_input)
 
 		follow_up
 	end	
