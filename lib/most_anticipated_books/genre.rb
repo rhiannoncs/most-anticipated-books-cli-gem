@@ -11,15 +11,6 @@ class MostAnticipatedBooks::Genre
   def self.all
     @@all
   end
-
-  def self.lowercase_all
-    lowercased = all.collect {|genre| genre.name.downcase}
-    lowercased
-  end
-
-  def self.list_all
-    all.each {|genre| puts genre.name}
-  end
   
   def add_book(book)
     @books << book

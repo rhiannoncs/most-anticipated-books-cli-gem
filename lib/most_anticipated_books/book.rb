@@ -74,7 +74,6 @@ class MostAnticipatedBooks::Book
   def self.books_by_genre(number_input)
     genre = MostAnticipatedBooks::Genre.all[number_input - 1]
     genre_books = all.select{|book| book.genre == genre}
-  	#genre_books = all.select{|book| book.genre.name.downcase == genre_name}
   	genre_books.each_with_index {|book, index| puts "#{index + 1}. #{book.title} by #{book.author.name}"}
   	genre_books
   end
