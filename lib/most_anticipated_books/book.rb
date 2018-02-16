@@ -79,8 +79,9 @@ class MostAnticipatedBooks::Book
   	genre_books
   end
 
-  def self.books_by_author(author_name)
-  	all.each {|book| book.display_info if book.author.name.downcase == author_name}
+  def self.books_by_author(number_input)
+    author = MostAnticipatedBooks::Author.all[number_input - 1]
+  	all.each {|book| book.display_info if book.author == author}
   end	
 
   def self.translated_books

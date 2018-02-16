@@ -18,7 +18,7 @@ class MostAnticipatedBooks::Author
   end
 
   def self.list_all
-    @@all.each {|author| puts author.name}
+    @@all.each_with_index {|author, index| puts "#{index + 1}. #{author.name}"}
   end
   
   def add_book(book)

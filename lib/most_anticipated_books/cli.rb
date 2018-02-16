@@ -99,10 +99,6 @@ class MostAnticipatedBooks::CLI
 			puts "To see a list of books within a genre, enter its number."
 			number_input = gets.to_i
 		end
-		#until MostAnticipatedBooks::Genre.lowercase_all.include?(genre_input) do
-		#	puts "To see a list of books within a genre, enter the genre."
-		#	genre_input = gets.downcase.strip
-		#end
 
 		genre_books = MostAnticipatedBooks::Book.books_by_genre(number_input)
 
@@ -112,15 +108,15 @@ class MostAnticipatedBooks::CLI
 	end
 
 	def list_by_author
-		MostAnticipatedBooks::Author.list_all	
+		MostAnticipatedBooks::Author.list_all
 
-		author_input = nil
-		until MostAnticipatedBooks::Author.lowercase_all.include?(author_input) do
-			puts "To see information about an author's book(s), enter the author's name."
-			author_input = gets.downcase.strip
-		end
+		number_input = nil
+		until (1..MostAnticipatedBooks::Author.all.length).include?(number_input) do
+			puts "To see information about an author's book(s), enter the author's number."
+			number_input = gets.to_i
+		end	
 
-		MostAnticipatedBooks::Book.books_by_author(author_input)
+		MostAnticipatedBooks::Book.books_by_author(number_input)
 
 		follow_up
 	end
