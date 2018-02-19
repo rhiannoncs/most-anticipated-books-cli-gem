@@ -41,7 +41,7 @@ class MostAnticipatedBooks::Scraper
 	end
 
 	def self.scrape_amazon(book)
-		user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+		user_agent = 'Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.63 Safari/534.3'
 		doc = Nokogiri::HTML(open(book.amazon_url, 'User-Agent' => user_agent))
 
 		publication_date = doc.css("div#booksTitle > div.a-section.a-spacing-none > h1#title > span:nth-child(3)").text
@@ -50,13 +50,13 @@ class MostAnticipatedBooks::Scraper
 		genre = doc.css("ul.zg_hrsr > li.zg_hrsr_item > span.zg_hrsr_ladder > a:nth-child(2)")[0]
 		genre.nil? ? book.genre = "Unknown" : book.genre = genre.text
 
-		isbn = doc.at_css('li:contains("ISBN-10")').text.sub("ISBN-10: ", '')
-		isbn.nil? ? book.isbn = "Unknown" : book.isbn = isbn
+		isbn = doc.at_css('li:contains("ISBN-10")')
+		isbn.nil? ? book.isbn = "Unknown" : book.isbn = isbn.text.sub("ISBN-10: ", '')
 		
 		start = "Publisher:[[:space:]]"
 		finish = Regexp.escape('(')
-		publisher = doc.at_css('li:contains("Publisher")').text[/#{start}(.*?)[[:space:]]#{finish}/m, 1]
-		publisher ? book.publisher = publisher : book.publisher = "Unknown"
+		publisher = doc.at_css('li:contains("Publisher")')
+		publisher ? book.publisher = publisher.text[/#{start}(.*?)[[:space:]]#{finish}/m, 1] : book.publisher = "Unknown"
 		
 
 		book.subgenres = []
